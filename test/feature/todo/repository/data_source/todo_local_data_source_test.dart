@@ -20,16 +20,16 @@ void main() {
   group("Todo Local Source", () {
     test("Fetch local data return success", () async {
       //assert
-      final todoIds = ["0"];
-      when(mockPrefs.getStringList(TODO_PREFS_KEY)).thenReturn(todoIds);
-      final stringTodo = await loadFixture("todo_fixture.json");
+      final stringTodo = await loadFixture("todo_list_fixture.json");
       when(mockPrefs.getString(any)).thenReturn(stringTodo);
       //act
       final response = await todoLocalDataSourceImpl.fetch();
       //verify
-      final todo = TodoModel.fromJson(jsonDecode(stringTodo));
-      final expected = [todo];
+      final List decodeJson = jsonDecode(stringTodo);
+      final expected = decodeJson.map((e) => TodoModel.fromJson(e)).toList();
       expect(response, expected);
+      verify(mockPrefs.getString(any));
+      verifyNoMoreInteractions(mockPrefs);
     });
   });
 }
