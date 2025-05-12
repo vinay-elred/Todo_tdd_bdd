@@ -62,5 +62,25 @@ void main() {
       verify(mockPrefs.setString(any, any));
       verifyNoMoreInteractions(mockPrefs);
     });
+
+    test("Add todo return failure", () async {
+      //assert
+      when(mockPrefs.getString(TODO_PREFS_KEY)).thenReturn(null);
+      when(
+        mockPrefs.setString(TODO_PREFS_KEY, any),
+      ).thenThrow(Exception());
+      //act
+      TodoModel todo = TodoModel(
+        id: "0",
+        todo: "Test todo",
+        isCompleted: false,
+      );
+      final call =  todoLocalDataSourceImpl.add(todo);
+      //verify
+      expect(() async => await call, throwsException);
+      verify(mockPrefs.getString(any));
+      verify(mockPrefs.setString(any, any));
+      verifyNoMoreInteractions(mockPrefs);
+    });
   });
 }
