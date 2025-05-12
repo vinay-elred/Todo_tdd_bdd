@@ -1,0 +1,12 @@
+[
+    {
+        "id": "0",
+        "todo": "Test todo",
+        "isCompleted": false
+    },
+    {
+        "id": "1",
+        "todo": "Test 2 todo",
+        "isCompleted": true
+    }
+]
