@@ -53,7 +53,7 @@ void main() {
       final todo = TodoModel(id: "0", todo: "Test todo", isCompleted: false);
       final response = await todoRepositoryImpl.add(todo);
       //verify
-      verify(todoLocalSource.fetch());
+      verify(todoLocalSource.add(any));
       expect(response, Right(unit));
       verifyNoMoreInteractions(todoLocalSource);
     });

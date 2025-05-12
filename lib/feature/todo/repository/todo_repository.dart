@@ -14,9 +14,9 @@ class TodoRepositoryImpl implements TodoRepository {
   const TodoRepositoryImpl({required this.localDataSource});
 
   @override
-  Future<Either<Failure, Unit>> add(TodoModel todo) {
-    // TODO: implement add
-    throw UnimplementedError();
+  Future<Either<Failure, Unit>> add(TodoModel todo) async {
+    final success = await localDataSource.add(todo);
+    return Right(unit);
   }
 
   @override
