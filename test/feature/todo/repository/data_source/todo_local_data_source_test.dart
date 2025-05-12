@@ -31,5 +31,16 @@ void main() {
       verify(mockPrefs.getString(any));
       verifyNoMoreInteractions(mockPrefs);
     });
+
+    test("Fetch local data return failure", () async {
+      //assert
+      when(mockPrefs.getString(any)).thenThrow(Exception());
+      //act
+      final call = todoLocalDataSourceImpl.fetch();
+      //verify
+      expect(() async => await call, throwsException);
+      verify(mockPrefs.getString(any));
+      verifyNoMoreInteractions(mockPrefs);
+    });
   });
 }
