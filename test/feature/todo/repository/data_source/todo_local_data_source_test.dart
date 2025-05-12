@@ -42,5 +42,25 @@ void main() {
       verify(mockPrefs.getString(any));
       verifyNoMoreInteractions(mockPrefs);
     });
+
+    test("Add todo return success", () async {
+      //assert
+      when(mockPrefs.getString(TODO_PREFS_KEY)).thenReturn(null);
+      final stringTodo = await loadFixture("todo_fixture.json");
+      when(
+        mockPrefs.setString(TODO_PREFS_KEY, stringTodo),
+      ).thenAnswer((_) async => true);
+      //act
+      TodoModel todo = TodoModel(
+        id: "0",
+        todo: "Test todo",
+        isCompleted: false,
+      );
+      final response = await todoLocalDataSourceImpl.add(todo);
+      //verify
+      expect(response, true);
+      verify(mockPrefs.setString(any, any));
+      verifyNoMoreInteractions(mockPrefs);
+    });
   });
 }
