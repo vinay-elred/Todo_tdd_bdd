@@ -30,7 +30,7 @@ void main() {
       //verify
       verify(todoLocalSource.fetch());
       expect(response, Right(todoList));
-      verifyZeroInteractions(todoLocalSource);
+      verifyNoMoreInteractions(todoLocalSource);
     });
   });
 }
