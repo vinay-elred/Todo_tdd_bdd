@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo_app/feature/todo/model/todo_model.dart';
 
@@ -11,6 +12,7 @@ abstract class TodoLocalDataSource {
 // ignore: constant_identifier_names
 const String TODO_PREFS_KEY = "TODO_PREFS_KEY";
 
+@LazySingleton(as:TodoLocalDataSource)
 class TodoLocalDataSourceImpl implements TodoLocalDataSource {
   final SharedPreferences prefs;
   const TodoLocalDataSourceImpl({required this.prefs});

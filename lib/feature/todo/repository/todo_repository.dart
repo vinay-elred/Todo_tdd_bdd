@@ -1,3 +1,4 @@
+import 'package:injectable/injectable.dart';
 import 'package:todo_app/core/exception.dart';
 import 'package:todo_app/core/failure.dart';
 import 'package:todo_app/feature/todo/model/todo_model.dart';
@@ -10,6 +11,7 @@ abstract class TodoRepository {
   Future<Either<Failure, Unit>> add(TodoModel todo);
 }
 
+@LazySingleton(as: TodoRepository)
 class TodoRepositoryImpl implements TodoRepository {
   final TodoLocalDataSource localDataSource;
   const TodoRepositoryImpl({required this.localDataSource});

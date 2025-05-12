@@ -1,10 +1,12 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:injectable/injectable.dart';
 import 'package:todo_app/core/toast_hepler.dart';
 import 'package:todo_app/feature/todo/model/todo_model.dart';
 import 'package:todo_app/feature/todo/repository/todo_repository.dart';
 
+@injectable
 class TodoViewModel extends ChangeNotifier {
   final TodoRepository repository;
   final ToastHelper toastHepler;
