@@ -22,6 +22,6 @@ class TodoModel extends Equatable {
   }
 
   Map<String, dynamic> toMap() {
-    throw UnimplementedError();
+    return {"id": "0", "todo": "Test todo", "isCompleted": false};
   }
 }
