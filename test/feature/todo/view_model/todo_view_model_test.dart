@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
+import 'package:todo_app/core/failure.dart';
 import 'package:todo_app/feature/todo/model/todo_model.dart';
 import 'package:todo_app/feature/todo/view_model/todo_view_model.dart';
 
@@ -29,6 +30,17 @@ void main() {
       await todoViewModel.fetch();
       //verify
       expect(todoViewModel.todos, todos);
+      verify(mockTodoRepo.fetch());
+      verifyNoMoreInteractions(mockTodoRepo);
+    });
+
+    test("fetch Todos retuen failure", () async {
+      //assert
+      when(mockTodoRepo.fetch()).thenAnswer((_) async => Left(CacheFailure()));
+      //act
+      await todoViewModel.fetch();
+      //verify
+      expect(todoViewModel.todos.length, 0);
       verify(mockTodoRepo.fetch());
       verifyNoMoreInteractions(mockTodoRepo);
     });
