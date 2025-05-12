@@ -38,5 +38,16 @@ void main() {
       //verify
       expect(actual, expected);
     });
+
+    test("Todo Model to map", () async {
+      //assert
+      final stringTodo = await loadFixture("todo_fixture.json");
+      final Map<String, dynamic> expected = jsonDecode(stringTodo);
+      //act
+      TodoModel todo = TodoModel(id: "0", todo: "Test todo", completed: false);
+      final actual = todo.toMap();
+      //verify
+      expect(actual, expected);
+    });
   });
 }
