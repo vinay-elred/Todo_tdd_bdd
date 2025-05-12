@@ -44,5 +44,21 @@ void main() {
       verify(mockTodoRepo.fetch());
       verifyNoMoreInteractions(mockTodoRepo);
     });
+
+    test("Add todo return success", () async {
+      //assert
+      when(mockTodoRepo.add(any)).thenAnswer((_) async => Right(unit));
+      //act
+      final TodoModel todo = TodoModel(
+        id: "0",
+        todo: "Test",
+        isCompleted: false,
+      );
+      await todoViewModel.add(todo);
+      //verify
+      expect(todoViewModel.todos.length, 1);
+      verify(mockTodoRepo.add(any));
+      verifyNoMoreInteractions(mockTodoRepo);
+    });
   });
 }
