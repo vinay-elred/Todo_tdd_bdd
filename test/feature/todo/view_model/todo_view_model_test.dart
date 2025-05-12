@@ -12,11 +12,18 @@ import 'mock_todo_repository.mocks.dart';
 
 void main() {
   late MockTodoRepo mockTodoRepo;
+  late MockMyToastHepler mockMyToastHepler;
   late TodoViewModel todoViewModel;
 
   setUp(() {
     mockTodoRepo = MockTodoRepo();
-    todoViewModel = TodoViewModel(repository: mockTodoRepo);
+    mockMyToastHepler = MockMyToastHepler();
+    todoViewModel = TodoViewModel(
+      repository: mockTodoRepo,
+      toastHepler: mockMyToastHepler,
+    );
+    when(mockMyToastHepler.show(any)).thenAnswer((_) async => true);
+    when(mockMyToastHepler.cancel()).thenAnswer((_) async => true);
   });
 
   group("Todo ViewModel", () {

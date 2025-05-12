@@ -66,3 +66,28 @@ class MockTodoRepo extends _i1.Mock implements _i3.TodoRepo {
           )
           as _i4.Future<_i2.Either<_i5.Failure, _i2.Unit>>);
 }
+
+/// A class which mocks [MyToastHepler].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockMyToastHepler extends _i1.Mock implements _i3.MyToastHepler {
+  MockMyToastHepler() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i4.Future<bool?> show(String? msg) =>
+      (super.noSuchMethod(
+            Invocation.method(#show, [msg]),
+            returnValue: _i4.Future<bool?>.value(),
+          )
+          as _i4.Future<bool?>);
+
+  @override
+  _i4.Future<bool?> cancel() =>
+      (super.noSuchMethod(
+            Invocation.method(#cancel, []),
+            returnValue: _i4.Future<bool?>.value(),
+          )
+          as _i4.Future<bool?>);
+}
