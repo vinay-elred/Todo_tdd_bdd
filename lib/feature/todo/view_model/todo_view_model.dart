@@ -20,5 +20,12 @@ class TodoViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> add(TodoModel todo) async {}
+  Future<void> add(TodoModel todo) async {
+    final response = await repository.add(todo);
+    response.fold(
+      (failure) => log("Add failed $failure"),
+      (unit) => _todos = [todo, ...todos],
+    );
+    notifyListeners();
+  }
 }
