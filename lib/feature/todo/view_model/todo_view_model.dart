@@ -15,7 +15,11 @@ class TodoViewModel extends ChangeNotifier {
   List<TodoModel> _todos = [];
   List<TodoModel> get todos => _todos;
 
+  bool _initialLoading = false;
+  bool get initialLoading => _initialLoading;
+
   Future<void> fetch() async {
+    _initialLoading = true;
     final response = await repository.fetch();
     response.fold(
       (failure) {
@@ -26,6 +30,7 @@ class TodoViewModel extends ChangeNotifier {
         return _todos = [...todos];
       },
     );
+    _initialLoading = false;
     notifyListeners();
   }
 

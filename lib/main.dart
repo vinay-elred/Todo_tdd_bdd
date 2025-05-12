@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todo_app/di_injection.dart';
+import 'package:todo_app/feature/todo/view/todos_page.dart';
+import 'package:todo_app/feature/todo/view_model/todo_view_model.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await configureDependencies();
   runApp(const MainApp());
 }
 
@@ -9,12 +15,9 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
+    return ChangeNotifierProvider(
+      create: (context) => getIt<TodoViewModel>(),
+      child: const MaterialApp(home: TodosPage()),
     );
   }
 }
