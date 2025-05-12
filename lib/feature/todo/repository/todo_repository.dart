@@ -21,7 +21,11 @@ class TodoRepositoryImpl implements TodoRepository {
 
   @override
   Future<Either<Failure, List<TodoModel>>> fetch() async {
-    final todos = await localDataSource.fetch();
-    return Right(todos);
+    try {
+      final todos = await localDataSource.fetch();
+      return Right(todos);
+    } catch (e) {
+      return Left(CacheFailure());
+    }
   }
 }
