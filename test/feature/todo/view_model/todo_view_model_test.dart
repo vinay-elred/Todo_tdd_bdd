@@ -60,5 +60,21 @@ void main() {
       verify(mockTodoRepo.add(any));
       verifyNoMoreInteractions(mockTodoRepo);
     });
+
+    test("Add todo return failure", () async {
+      //assert
+      when(mockTodoRepo.add(any)).thenAnswer((_) async => Left(CacheFailure()));
+      //act
+      final TodoModel todo = TodoModel(
+        id: "0",
+        todo: "Test",
+        isCompleted: false,
+      );
+      await todoViewModel.add(todo);
+      //verify
+      expect(todoViewModel.todos.length, 0);
+      verify(mockTodoRepo.add(any));
+      verifyNoMoreInteractions(mockTodoRepo);
+    });
   });
 }
