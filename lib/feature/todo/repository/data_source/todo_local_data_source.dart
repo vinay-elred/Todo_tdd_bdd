@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:dartz/dartz.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo_app/feature/todo/model/todo_model.dart';
 
@@ -17,9 +16,17 @@ class TodoLocalDataSourceImpl implements TodoLocalDataSource {
   const TodoLocalDataSourceImpl({required this.prefs});
 
   @override
-  Future<bool> add(TodoModel todo) {
-    // TODO: implement add
-    throw UnimplementedError();
+  Future<bool> add(TodoModel todo) async {
+    final todoListString = prefs.getString(TODO_PREFS_KEY) ?? "[]";
+    final List decodedJson = jsonDecode(todoListString);
+    final todos = decodedJson.map((e) => TodoModel.fromJson(e)).toList();
+    final newTodo = jsonEncode(todo.toMap());
+    final updatedList = [newTodo, ...todos];
+    final success = await prefs.setString(
+      TODO_PREFS_KEY,
+      jsonEncode(updatedList),
+    );
+    return success;
   }
 
   @override

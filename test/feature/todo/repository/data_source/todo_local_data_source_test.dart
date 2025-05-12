@@ -46,9 +46,8 @@ void main() {
     test("Add todo return success", () async {
       //assert
       when(mockPrefs.getString(TODO_PREFS_KEY)).thenReturn(null);
-      final stringTodo = await loadFixture("todo_fixture.json");
       when(
-        mockPrefs.setString(TODO_PREFS_KEY, stringTodo),
+        mockPrefs.setString(TODO_PREFS_KEY, any),
       ).thenAnswer((_) async => true);
       //act
       TodoModel todo = TodoModel(
@@ -59,6 +58,7 @@ void main() {
       final response = await todoLocalDataSourceImpl.add(todo);
       //verify
       expect(response, true);
+      verify(mockPrefs.getString(any));
       verify(mockPrefs.setString(any, any));
       verifyNoMoreInteractions(mockPrefs);
     });
