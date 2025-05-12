@@ -1,3 +1,4 @@
+import 'package:todo_app/core/exception.dart';
 import 'package:todo_app/core/failure.dart';
 import 'package:todo_app/feature/todo/model/todo_model.dart';
 import 'package:dartz/dartz.dart';
@@ -15,8 +16,13 @@ class TodoRepositoryImpl implements TodoRepository {
 
   @override
   Future<Either<Failure, Unit>> add(TodoModel todo) async {
-    final success = await localDataSource.add(todo);
-    return Right(unit);
+    try {
+      final success = await localDataSource.add(todo);
+      if (!success) throw CacheException();
+      return Right(unit);
+    } catch (e) {
+      return Left(CacheFailure());
+    }
   }
 
   @override
