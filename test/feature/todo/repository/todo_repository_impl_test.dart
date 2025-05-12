@@ -45,5 +45,17 @@ void main() {
       expect(response, Left(CacheFailure()));
       verifyNoMoreInteractions(todoLocalSource);
     });
+
+    test("Add Todo with success", () async {
+      //assert
+      when(todoLocalSource.add(any)).thenAnswer((_) async => true);
+      //act
+      final todo = TodoModel(id: "0", todo: "Test todo", isCompleted: false);
+      final response = await todoRepositoryImpl.add(todo);
+      //verify
+      verify(todoLocalSource.fetch());
+      expect(response, Right(unit));
+      verifyNoMoreInteractions(todoLocalSource);
+    });
   });
 }
