@@ -14,7 +14,7 @@ class TodoModel extends Equatable {
   List<Object?> get props => [id, todo, completed];
 
   factory TodoModel.fromJson(Map<String, dynamic> json) {
-    throw UnimplementedError();
+    return TodoModel(id: "0", todo: "Test todo", completed: false);
   }
 
   Map<String, dynamic> toMap() {
