@@ -7,7 +7,7 @@ import 'package:todo_app/feature/todo/repository/todo_repository.dart';
 
 class TodoViewModel extends ChangeNotifier {
   final TodoRepository repository;
-  final ToastHepler toastHepler;
+  final ToastHelper toastHepler;
   TodoViewModel({required this.repository, required this.toastHepler});
 
   List<TodoModel> _todos = [];

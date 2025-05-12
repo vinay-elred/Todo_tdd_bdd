@@ -7,4 +7,4 @@ import 'package:todo_app/feature/todo/repository/todo_repository.dart';
 class TodoRepo extends Mock implements TodoRepository {}
 
 @GenerateMocks([MyToastHepler])
-class MyToastHepler extends Mock implements ToastHepler {}
+class MyToastHepler extends Mock implements ToastHelper {}
