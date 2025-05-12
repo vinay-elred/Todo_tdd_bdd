@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
+import 'package:todo_app/core/exception.dart';
+import 'package:todo_app/core/failure.dart';
 import 'package:todo_app/feature/todo/model/todo_model.dart';
 import 'package:todo_app/feature/todo/repository/todo_repository.dart';
 
@@ -30,6 +32,17 @@ void main() {
       //verify
       verify(todoLocalSource.fetch());
       expect(response, Right(todoList));
+      verifyNoMoreInteractions(todoLocalSource);
+    });
+
+    test("Fetching Todo List with failure", () async {
+      //assert
+      when(todoLocalSource.fetch()).thenThrow(CacheException());
+      //act
+      final response = await todoRepositoryImpl.fetch();
+      //verify
+      verify(todoLocalSource.fetch());
+      expect(response, Left(CacheFailure()));
       verifyNoMoreInteractions(todoLocalSource);
     });
   });
