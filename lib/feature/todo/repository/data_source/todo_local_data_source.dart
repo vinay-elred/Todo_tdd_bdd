@@ -21,9 +21,8 @@ class TodoLocalDataSourceImpl implements TodoLocalDataSource {
   Future<bool> add(TodoModel todo) async {
     final todoListString = prefs.getString(TODO_PREFS_KEY) ?? "[]";
     final List decodedJson = jsonDecode(todoListString);
-    final todos = decodedJson.map((e) => TodoModel.fromJson(e)).toList();
     final newTodo = jsonEncode(todo.toMap());
-    final updatedList = [newTodo, ...todos];
+    final updatedList = [newTodo, ...decodedJson];
     final success = await prefs.setString(
       TODO_PREFS_KEY,
       jsonEncode(updatedList),
