@@ -12,7 +12,7 @@ abstract class TodoLocalDataSource {
 // ignore: constant_identifier_names
 const String TODO_PREFS_KEY = "TODO_PREFS_KEY";
 
-@LazySingleton(as:TodoLocalDataSource)
+@LazySingleton(as: TodoLocalDataSource)
 class TodoLocalDataSourceImpl implements TodoLocalDataSource {
   final SharedPreferences prefs;
   const TodoLocalDataSourceImpl({required this.prefs});
@@ -34,7 +34,8 @@ class TodoLocalDataSourceImpl implements TodoLocalDataSource {
   Future<List<TodoModel>> fetch() async {
     final todoListString = prefs.getString(TODO_PREFS_KEY) ?? "[]";
     final List decodedJson = jsonDecode(todoListString);
-    final todos = decodedJson.map((e) => TodoModel.fromJson(e)).toList();
+    final todos =
+        decodedJson.map((e) => TodoModel.fromJson(jsonDecode(e))).toList();
     return todos;
   }
 }

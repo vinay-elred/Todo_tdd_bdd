@@ -13,6 +13,12 @@ class TodosPage extends StatefulWidget {
 
 class _TodosPageState extends State<TodosPage> {
   @override
+  void initState() {
+    context.read<TodoViewModel>().fetch();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Todos")),
