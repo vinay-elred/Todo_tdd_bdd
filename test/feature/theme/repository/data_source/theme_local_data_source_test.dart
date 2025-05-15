@@ -40,5 +40,14 @@ void main() {
       expect(() async => await call, throwsException);
       verify(prefs.getString(any));
     });
+
+    test("Set Theme to prefs with success", () async {
+      //arrange
+      when(prefs.setString(THEME_PREFS_KEY, any)).thenAnswer((_) async => true);
+      //act
+      await localDataSourceImpl.setTheme(ThemeModel(Theme.dark));
+      //verify
+      verify(prefs.setString(any, any));
+    });
   });
 }
