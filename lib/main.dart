@@ -17,7 +17,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => getIt<TodoViewModel>(),
-      child: const MaterialApp(home: TodosPage()),
+      child: MaterialApp(home: TodosPage()),
     );
   }
 }

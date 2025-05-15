@@ -11,14 +11,10 @@ import './step/i_tap_icon.dart';
 import './step/mock_prefs_return_todo_when_added.dart';
 import './step/i_enter_in_textfield.dart';
 import './step/i_tap_text.dart';
-import 'test_di.dart';
 
 void main() {
   group('''Todo''', () {
-    Future<void> bddSetUp(WidgetTester tester) async {
-      await setupTestDI();
-    }
-
+    Future<void> bddSetUp(WidgetTester tester) async {}
     testWidgets('''When Todo list is empty''', (tester) async {
       await bddSetUp(tester);
       await mockPrefsEmptyTodosList(tester);
