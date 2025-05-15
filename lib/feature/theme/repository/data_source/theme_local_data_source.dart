@@ -6,6 +6,9 @@ abstract class ThemeLocalDataSource {
   Future<void> setTheme(ThemeModel theme);
 }
 
+// ignore: constant_identifier_names
+const String THEME_PREFS_KEY = "THEME_PREFS_KEY";
+
 class ThemeLocalDataSourceImpl implements ThemeLocalDataSource {
   final SharedPreferences prefs;
   const ThemeLocalDataSourceImpl({required this.prefs});
