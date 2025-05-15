@@ -12,7 +12,7 @@ import 'theme_repository_impl_test.mocks.dart';
 
 @GenerateMocks([ThemeLocalDataSource])
 void main() {
-  late ThemeLocalDataSource mockLocalDataSource;
+  late MockThemeLocalDataSource mockLocalDataSource;
   late ThemeRepositoryImpl themeRepositoryImpl;
 
   setUp(() {
@@ -42,6 +42,17 @@ void main() {
       //verify
       expect(response, Left(CacheFailure()));
       verify(mockLocalDataSource.getTheme());
+    });
+
+    test("Set Theme return success", () async {
+      //arrange
+      when(mockLocalDataSource.setTheme(any)).thenAnswer((_) async => unit);
+      //act
+      final response = await themeRepositoryImpl.setTheme(
+        ThemeModel(Theme.dark),
+      );
+      //verify
+      expect(response, Right(unit));
     });
   });
 }
