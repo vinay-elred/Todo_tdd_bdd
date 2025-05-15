@@ -28,5 +28,27 @@ void main() {
       //verify
       expect(actual, expected);
     });
+
+    test("Theme Model from json when Theme.system", () async {
+      //arrange
+      final expected = ThemeModel(Theme.system);
+      //act
+      final stringTheme = await loadFixture("theme_system_fixture.json");
+      final Map<String, dynamic> decodeJson = jsonDecode(stringTheme);
+      final actual = ThemeModel.fromJson(decodeJson);
+      //verify
+      expect(actual, expected);
+    });
+
+    
+    test("Theme Model from json when Theme.system when json failed", () async {
+      //arrange
+      final expected = ThemeModel(Theme.system);
+      //act
+      final Map<String, dynamic> decodeJson = {};
+      final actual = ThemeModel.fromJson(decodeJson);
+      //verify
+      expect(actual, expected);
+    });
   });
 }
