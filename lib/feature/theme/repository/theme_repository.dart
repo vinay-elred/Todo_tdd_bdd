@@ -12,18 +12,20 @@ abstract class ThemeRepository {
 class ThemeRepositoryImpl implements ThemeRepository {
   final ThemeLocalDataSource themeLocalDataSource;
   const ThemeRepositoryImpl({required this.themeLocalDataSource});
-  
+
   @override
-  Future<Either<Failure, ThemeModel>> getTheme() {
-    // TODO: implement getTheme
-    throw UnimplementedError();
+  Future<Either<Failure, ThemeModel>> getTheme() async {
+    try {
+      final theme = await themeLocalDataSource.getTheme();
+      return Right(theme);
+    } catch (e) {
+      return Left(CacheFailure());
+    }
   }
-  
+
   @override
   Future<Either<Failure, Unit>> setTheme(ThemeModel theme) {
     // TODO: implement setTheme
     throw UnimplementedError();
   }
-
-  
 }

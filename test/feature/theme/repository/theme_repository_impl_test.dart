@@ -2,6 +2,8 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:todo_app/core/exception.dart';
+import 'package:todo_app/core/failure.dart';
 import 'package:todo_app/feature/theme/model/theme_model.dart';
 import 'package:todo_app/feature/theme/repository/data_source/theme_local_data_source.dart';
 import 'package:todo_app/feature/theme/repository/theme_repository.dart';
@@ -29,6 +31,16 @@ void main() {
       final response = await themeRepositoryImpl.getTheme();
       //verify
       expect(response, Right(expected));
+      verify(mockLocalDataSource.getTheme());
+    });
+
+    test("Fetch Theme throw cache expection", () async {
+      //arrange
+      when(mockLocalDataSource.getTheme()).thenThrow(CacheException());
+      //act
+      final response = await themeRepositoryImpl.getTheme();
+      //verify
+      expect(response, Left(CacheFailure()));
       verify(mockLocalDataSource.getTheme());
     });
   });
