@@ -40,13 +40,23 @@ void main() {
       expect(actual, expected);
     });
 
-    
     test("Theme Model from json when Theme.system when json failed", () async {
       //arrange
       final expected = ThemeModel(Theme.system);
       //act
       final Map<String, dynamic> decodeJson = {};
       final actual = ThemeModel.fromJson(decodeJson);
+      //verify
+      expect(actual, expected);
+    });
+
+    test("Theme Model to map", () async {
+      //arrange
+      final stringTheme = await loadFixture("theme_system_fixture.json");
+      final Map<String, dynamic> decodeJson = jsonDecode(stringTheme);
+      final expected = ThemeModel.fromJson(decodeJson);
+      //act
+      final actual = ThemeModel(Theme.system).toMap();
       //verify
       expect(actual, expected);
     });
