@@ -24,8 +24,12 @@ class ThemeRepositoryImpl implements ThemeRepository {
   }
 
   @override
-  Future<Either<Failure, Unit>> setTheme(ThemeModel theme) {
-    // TODO: implement setTheme
-    throw UnimplementedError();
+  Future<Either<Failure, Unit>> setTheme(ThemeModel theme) async {
+    try {
+      await themeLocalDataSource.setTheme(theme);
+      return Right(unit);
+    } catch (e) {
+      return Left(CacheFailure());
+    }
   }
 }

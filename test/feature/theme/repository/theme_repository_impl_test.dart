@@ -54,5 +54,16 @@ void main() {
       //verify
       expect(response, Right(unit));
     });
+
+    test("Set Theme throw Cache expection", () async {
+      //arrange
+      when(mockLocalDataSource.setTheme(any)).thenThrow(CacheException());
+      //act
+      final response = await themeRepositoryImpl.setTheme(
+        ThemeModel(Theme.dark),
+      );
+      //verify
+      expect(response, Left(CacheFailure()));
+    });
   });
 }
