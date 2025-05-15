@@ -53,8 +53,7 @@ void main() {
     test("Theme Model to map", () async {
       //arrange
       final stringTheme = await loadFixture("theme_system_fixture.json");
-      final Map<String, dynamic> decodeJson = jsonDecode(stringTheme);
-      final expected = ThemeModel.fromJson(decodeJson);
+      final Map<String, dynamic> expected = jsonDecode(stringTheme);
       //act
       final actual = ThemeModel(Theme.system).toMap();
       //verify

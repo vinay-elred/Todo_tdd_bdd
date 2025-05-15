@@ -13,7 +13,7 @@ class ThemeModel extends Equatable {
   }
 
   Map<String, dynamic> toMap() {
-    throw UnimplementedError();
+    return {"theme": theme.name};
   }
 }
 
