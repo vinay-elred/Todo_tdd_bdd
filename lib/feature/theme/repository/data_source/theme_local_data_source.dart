@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:todo_app/core/exception.dart';
 import 'package:todo_app/feature/theme/model/theme_model.dart';
 
 abstract class ThemeLocalDataSource {
@@ -24,8 +25,9 @@ class ThemeLocalDataSourceImpl implements ThemeLocalDataSource {
   }
 
   @override
-  Future<void> setTheme(ThemeModel theme) {
-    // TODO: implement setTheme
-    throw UnimplementedError();
+  Future<void> setTheme(ThemeModel theme) async {
+    final themeString = jsonEncode(theme.toMap());
+    final success = await prefs.setString(THEME_PREFS_KEY, themeString);
+    if (!success) throw CacheException();
   }
 }

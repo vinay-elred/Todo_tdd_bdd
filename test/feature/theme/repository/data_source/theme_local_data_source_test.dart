@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
+import 'package:todo_app/core/exception.dart';
 import 'package:todo_app/feature/theme/model/theme_model.dart';
 import 'package:todo_app/feature/theme/repository/data_source/theme_local_data_source.dart';
 
@@ -47,6 +48,18 @@ void main() {
       //act
       await localDataSourceImpl.setTheme(ThemeModel(Theme.dark));
       //verify
+      verify(prefs.setString(any, any));
+    });
+
+    test("Set Theme to prefs with Exception", () async {
+      //arrange
+      when(
+        prefs.setString(THEME_PREFS_KEY, any),
+      ).thenAnswer((_) async => false);
+      //act
+      final call = localDataSourceImpl.setTheme(ThemeModel(Theme.dark));
+      //verify
+      expect(() async => await call, throwsA(TypeMatcher<CacheException>()));
       verify(prefs.setString(any, any));
     });
   });
