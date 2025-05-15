@@ -30,5 +30,15 @@ void main() {
       expect(response, expected);
       verify(prefs.getString(any));
     });
+
+    test("Get Theme from fetch() throw Exception", () async {
+      //arrange
+      when(prefs.getString(THEME_PREFS_KEY)).thenThrow(Exception());
+      //act
+      final call = localDataSourceImpl.getTheme();
+      //verify
+      expect(() async => await call, throwsException);
+      verify(prefs.getString(any));
+    });
   });
 }

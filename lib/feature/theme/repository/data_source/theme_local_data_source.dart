@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo_app/feature/theme/model/theme_model.dart';
 
@@ -14,9 +16,11 @@ class ThemeLocalDataSourceImpl implements ThemeLocalDataSource {
   const ThemeLocalDataSourceImpl({required this.prefs});
 
   @override
-  Future<ThemeModel> getTheme() {
-    // TODO: implement getTheme
-    throw UnimplementedError();
+  Future<ThemeModel> getTheme() async {
+    final themeString = prefs.getString(THEME_PREFS_KEY) ?? "{}";
+    final decodeJson = jsonDecode(themeString);
+    final theme = ThemeModel.fromJson(decodeJson);
+    return theme;
   }
 
   @override
