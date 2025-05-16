@@ -64,5 +64,17 @@ void main() {
       expect(themeViewModel.themeStream, emitsInOrder([ThemeMode.system]));
       verify(mockThemeRepository.getTheme());
     });
+
+    test('Set Theme to Dark', () async {
+      //arrange
+      when(
+        mockThemeRepository.setTheme(any),
+      ).thenAnswer((_) async => Right(unit));
+      //act
+      await themeViewModel.changeTheme(ThemeModel(Themes.dark));
+      //verify
+      expect(themeViewModel.themeStream, emitsInOrder([ThemeMode.dark]));
+      verify(mockThemeRepository.setTheme(any));
+    });
   });
 }
