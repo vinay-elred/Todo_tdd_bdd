@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 
 class ThemeModel extends Equatable {
   const ThemeModel(this.theme);
@@ -14,6 +15,12 @@ class ThemeModel extends Equatable {
 
   Map<String, dynamic> toMap() {
     return {"theme": theme.name};
+  }
+
+  ThemeMode toThemeMode() {
+    if (theme == Themes.dark) return ThemeMode.dark;
+    if (theme == Themes.light) return ThemeMode.light;
+    return ThemeMode.system;
   }
 }
 
