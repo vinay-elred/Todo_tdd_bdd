@@ -1,5 +1,6 @@
 Feature: Todo
-    Background: setup test DI
+    Background: 
+        Given The setup Test DI
 
     Scenario: When Todo list is empty
         Given: Mock Prefs empty Todos List

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_app/feature/theme/view/theme_page.dart';
+import 'package:todo_app/feature/theme/view_model/theme_view_model.dart';
 import 'package:todo_app/feature/todo/model/todo_model.dart';
 import 'package:todo_app/feature/todo/view/add_todo_page.dart';
 import 'package:todo_app/feature/todo/view_model/todo_view_model.dart';
@@ -14,14 +16,27 @@ class TodosPage extends StatefulWidget {
 class _TodosPageState extends State<TodosPage> {
   @override
   void initState() {
-    context.read<TodoViewModel>().fetch();
     super.initState();
+    context.read<TodoViewModel>().fetch();
+    context.read<ThemeViewModel>().getTheme();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Todos")),
+      appBar: AppBar(
+        title: Text("Todos"),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.of(
+                context,
+              ).push(MaterialPageRoute(builder: (context) => ThemePage()));
+            },
+            icon: Icon(Icons.settings),
+          ),
+        ],
+      ),
       body: buildBody(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {

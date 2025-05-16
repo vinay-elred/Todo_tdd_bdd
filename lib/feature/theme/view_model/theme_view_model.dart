@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
+import 'package:rxdart/rxdart.dart';
 import 'package:todo_app/core/toast_hepler.dart';
 import 'package:todo_app/feature/theme/model/theme_model.dart';
 import 'package:todo_app/feature/theme/repository/theme_repository.dart';
@@ -12,7 +13,7 @@ class ThemeViewModel extends ChangeNotifier {
   final ToastHelper toastHelper;
   ThemeViewModel({required this.themeRepository, required this.toastHelper});
 
-  final StreamController<ThemeMode> _streamController = StreamController();
+  final BehaviorSubject<ThemeMode> _streamController = BehaviorSubject();
 
   Stream<ThemeMode> get themeStream => _streamController.stream;
 

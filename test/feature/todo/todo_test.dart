@@ -4,6 +4,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import './step/the_setup_test_di.dart';
 import './step/mock_prefs_empty_todos_list.dart';
 import './step/the_app_is_running.dart';
 import './step/i_see_text.dart';
@@ -14,7 +15,10 @@ import './step/i_tap_text.dart';
 
 void main() {
   group('''Todo''', () {
-    Future<void> bddSetUp(WidgetTester tester) async {}
+    Future<void> bddSetUp(WidgetTester tester) async {
+      await theSetupTestDi(tester);
+    }
+
     testWidgets('''When Todo list is empty''', (tester) async {
       await bddSetUp(tester);
       await mockPrefsEmptyTodosList(tester);
