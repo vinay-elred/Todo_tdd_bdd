@@ -21,7 +21,19 @@ class MainApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => getIt<TodoViewModel>()),
         ChangeNotifierProvider(create: (_) => getIt<ThemeViewModel>()),
       ],
-      child: MaterialApp(home: TodosPage()),
+      builder: (context, child) {
+        return StreamBuilder(
+          stream: context.read<ThemeViewModel>().themeStream,
+          builder: (context, snapshot) {
+            return MaterialApp(
+              themeMode: snapshot.data,
+              theme: ThemeData.light(),
+              darkTheme: ThemeData.dark(),
+              home: TodosPage(),
+            );
+          },
+        );
+      },
     );
   }
 }
