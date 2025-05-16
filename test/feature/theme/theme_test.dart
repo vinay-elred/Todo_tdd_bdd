@@ -26,7 +26,6 @@ void main() {
     });
     testWidgets('''User changed System Theme to Dark''', (tester) async {
       await bddSetUp(tester);
-      await appThemeSettingIsSystem(tester);
       await theAppIsRunning(tester);
       await iTapIcon(tester, Icons.settings);
       await iTapText(tester, "Dark");
@@ -34,7 +33,6 @@ void main() {
     });
     testWidgets('''User changed System Theme to Light''', (tester) async {
       await bddSetUp(tester);
-      await appThemeSettingIsSystem(tester);
       await theAppIsRunning(tester);
       await iTapIcon(tester, Icons.settings);
       await iTapText(tester, "Light");

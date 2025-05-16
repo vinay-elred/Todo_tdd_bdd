@@ -8,14 +8,12 @@ Feature: Theme
         Then I see {Icons.check} on {"System"}
 
     Scenario: User changed System Theme to Dark
-        Given App Theme setting is System
         Given The app is running
         When I tap {Icons.settings} icon
         And I tap {"Dark"} text
         Then I see {Icons.check} on {"Dark"}
 
     Scenario: User changed System Theme to Light
-        Given App Theme setting is System
         Given The app is running
         When I tap {Icons.settings} icon
         And I tap {"Light"} text
