@@ -76,5 +76,30 @@ void main() {
       expect(themeViewModel.themeStream, emitsInOrder([ThemeMode.dark]));
       verify(mockThemeRepository.setTheme(any));
     });
+
+    test('Set Theme to Light', () async {
+      //arrange
+      when(
+        mockThemeRepository.setTheme(any),
+      ).thenAnswer((_) async => Right(unit));
+      //act
+      await themeViewModel.changeTheme(ThemeModel(Themes.dark));
+      //verify
+      expect(themeViewModel.themeStream, emitsInOrder([ThemeMode.dark]));
+      verify(mockThemeRepository.setTheme(any));
+    });
+
+    test('Set Theme return failure', () async {
+      //arrange
+      when(
+        mockThemeRepository.setTheme(any),
+      ).thenAnswer((_) async => Left(CacheFailure()));
+      //act
+      await themeViewModel.changeTheme(ThemeModel(Themes.dark));
+      //verify
+      expect(themeViewModel.themeStream, emitsInOrder([]));
+      verify(toastHepler.show(any));
+      verify(mockThemeRepository.setTheme(any));
+    });
   });
 }

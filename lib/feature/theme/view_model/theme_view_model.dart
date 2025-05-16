@@ -28,7 +28,14 @@ class ThemeViewModel extends ChangeNotifier {
 
   Future<void> changeTheme(ThemeModel theme) async {
     final response = await themeRepository.setTheme(theme);
-    response.fold((failure) {}, (unit) {});
+    response.fold(
+      (failure) {
+        toastHelper.show("Failed to set Theme!");
+      },
+      (unit) {
+        _streamController.add(theme.toThemeMode());
+      },
+    );
   }
 
   @override
