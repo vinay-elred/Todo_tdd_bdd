@@ -15,6 +15,10 @@ import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
 import 'core/inject_modules.dart' as _i195;
 import 'core/toast_hepler.dart' as _i837;
+import 'feature/theme/repository/data_source/theme_local_data_source.dart'
+    as _i804;
+import 'feature/theme/repository/theme_repository.dart' as _i1003;
+import 'feature/theme/view_model/theme_view_model.dart' as _i23;
 import 'feature/todo/repository/data_source/todo_local_data_source.dart'
     as _i582;
 import 'feature/todo/repository/todo_repository.dart' as _i941;
@@ -36,6 +40,10 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i582.TodoLocalDataSource>(
       () => _i582.TodoLocalDataSourceImpl(prefs: gh<_i460.SharedPreferences>()),
     );
+    gh.lazySingleton<_i804.ThemeLocalDataSource>(
+      () =>
+          _i804.ThemeLocalDataSourceImpl(prefs: gh<_i460.SharedPreferences>()),
+    );
     gh.lazySingleton<_i941.TodoRepository>(
       () => _i941.TodoRepositoryImpl(
         localDataSource: gh<_i582.TodoLocalDataSource>(),
@@ -45,6 +53,17 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i962.TodoViewModel(
         repository: gh<_i941.TodoRepository>(),
         toastHepler: gh<_i837.ToastHelper>(),
+      ),
+    );
+    gh.lazySingleton<_i1003.ThemeRepository>(
+      () => _i1003.ThemeRepositoryImpl(
+        themeLocalDataSource: gh<_i804.ThemeLocalDataSource>(),
+      ),
+    );
+    gh.factory<_i23.ThemeViewModel>(
+      () => _i23.ThemeViewModel(
+        themeRepository: gh<_i1003.ThemeRepository>(),
+        toastHelper: gh<_i837.ToastHelper>(),
       ),
     );
     return this;

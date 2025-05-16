@@ -1,10 +1,12 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:injectable/injectable.dart';
 import 'package:todo_app/core/toast_hepler.dart';
 import 'package:todo_app/feature/theme/model/theme_model.dart';
 import 'package:todo_app/feature/theme/repository/theme_repository.dart';
 
+@injectable
 class ThemeViewModel extends ChangeNotifier {
   final ThemeRepository themeRepository;
   final ToastHelper toastHelper;

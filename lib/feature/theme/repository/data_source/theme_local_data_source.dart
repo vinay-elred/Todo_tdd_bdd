@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo_app/core/exception.dart';
 import 'package:todo_app/feature/theme/model/theme_model.dart';
@@ -12,6 +13,7 @@ abstract class ThemeLocalDataSource {
 // ignore: constant_identifier_names
 const String THEME_PREFS_KEY = "THEME_PREFS_KEY";
 
+@LazySingleton(as: ThemeLocalDataSource)
 class ThemeLocalDataSourceImpl implements ThemeLocalDataSource {
   final SharedPreferences prefs;
   const ThemeLocalDataSourceImpl({required this.prefs});
