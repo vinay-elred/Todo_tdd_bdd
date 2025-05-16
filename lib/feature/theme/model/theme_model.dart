@@ -2,14 +2,14 @@ import 'package:equatable/equatable.dart';
 
 class ThemeModel extends Equatable {
   const ThemeModel(this.theme);
-  final Theme theme;
+  final Themes theme;
 
   @override
   List<Object?> get props => [theme];
 
   factory ThemeModel.fromJson(Map<String, dynamic> json) {
     final themeString = json["theme"];
-    return ThemeModel(Theme.fromString(themeString));
+    return ThemeModel(Themes.fromString(themeString));
   }
 
   Map<String, dynamic> toMap() {
@@ -17,14 +17,14 @@ class ThemeModel extends Equatable {
   }
 }
 
-enum Theme {
+enum Themes {
   light,
   dark,
   system;
 
-  factory Theme.fromString(String? theme) {
-    if (theme == Theme.light.name) return Theme.light;
-    if (theme == Theme.dark.name) return Theme.dark;
-    return Theme.system;
+  factory Themes.fromString(String? theme) {
+    if (theme == Themes.light.name) return Themes.light;
+    if (theme == Themes.dark.name) return Themes.dark;
+    return Themes.system;
   }
 }

@@ -46,7 +46,7 @@ void main() {
       //arrange
       when(prefs.setString(THEME_PREFS_KEY, any)).thenAnswer((_) async => true);
       //act
-      await localDataSourceImpl.setTheme(ThemeModel(Theme.dark));
+      await localDataSourceImpl.setTheme(ThemeModel(Themes.dark));
       //verify
       verify(prefs.setString(any, any));
     });
@@ -57,7 +57,7 @@ void main() {
         prefs.setString(THEME_PREFS_KEY, any),
       ).thenAnswer((_) async => false);
       //act
-      final call = localDataSourceImpl.setTheme(ThemeModel(Theme.dark));
+      final call = localDataSourceImpl.setTheme(ThemeModel(Themes.dark));
       //verify
       expect(() async => await call, throwsA(TypeMatcher<CacheException>()));
       verify(prefs.setString(any, any));

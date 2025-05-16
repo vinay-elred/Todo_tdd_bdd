@@ -9,7 +9,7 @@ void main() {
   group("Theme Model", () {
     test("Theme Model from json when Theme.Light", () async {
       //arrange
-      final expected = ThemeModel(Theme.light);
+      final expected = ThemeModel(Themes.light);
       //act
       final stringTheme = await loadFixture("theme_light_fixture.json");
       final Map<String, dynamic> decodeJson = jsonDecode(stringTheme);
@@ -20,7 +20,7 @@ void main() {
 
     test("Theme Model from json when Theme.dark", () async {
       //arrange
-      final expected = ThemeModel(Theme.dark);
+      final expected = ThemeModel(Themes.dark);
       //act
       final stringTheme = await loadFixture("theme_dark_fixture.json");
       final Map<String, dynamic> decodeJson = jsonDecode(stringTheme);
@@ -31,7 +31,7 @@ void main() {
 
     test("Theme Model from json when Theme.system", () async {
       //arrange
-      final expected = ThemeModel(Theme.system);
+      final expected = ThemeModel(Themes.system);
       //act
       final stringTheme = await loadFixture("theme_system_fixture.json");
       final Map<String, dynamic> decodeJson = jsonDecode(stringTheme);
@@ -42,7 +42,7 @@ void main() {
 
     test("Theme Model from json when Theme.system when json failed", () async {
       //arrange
-      final expected = ThemeModel(Theme.system);
+      final expected = ThemeModel(Themes.system);
       //act
       final Map<String, dynamic> decodeJson = {};
       final actual = ThemeModel.fromJson(decodeJson);
@@ -55,7 +55,7 @@ void main() {
       final stringTheme = await loadFixture("theme_system_fixture.json");
       final Map<String, dynamic> expected = jsonDecode(stringTheme);
       //act
-      final actual = ThemeModel(Theme.system).toMap();
+      final actual = ThemeModel(Themes.system).toMap();
       //verify
       expect(actual, expected);
     });

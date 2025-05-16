@@ -25,7 +25,7 @@ void main() {
   group("Theme Repository", () {
     test("Fetch Theme returns Theme Model", () async {
       //arrange
-      final expected = ThemeModel(Theme.dark);
+      final expected = ThemeModel(Themes.dark);
       when(mockLocalDataSource.getTheme()).thenAnswer((_) async => expected);
       //act
       final response = await themeRepositoryImpl.getTheme();
@@ -49,7 +49,7 @@ void main() {
       when(mockLocalDataSource.setTheme(any)).thenAnswer((_) async => unit);
       //act
       final response = await themeRepositoryImpl.setTheme(
-        ThemeModel(Theme.dark),
+        ThemeModel(Themes.dark),
       );
       //verify
       expect(response, Right(unit));
@@ -60,7 +60,7 @@ void main() {
       when(mockLocalDataSource.setTheme(any)).thenThrow(CacheException());
       //act
       final response = await themeRepositoryImpl.setTheme(
-        ThemeModel(Theme.dark),
+        ThemeModel(Themes.dark),
       );
       //verify
       expect(response, Left(CacheFailure()));
